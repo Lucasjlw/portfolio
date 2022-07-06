@@ -7,7 +7,7 @@ export default function sketch(p5: P5Instance) {
     p5.setup = () => {
         p5.createCanvas(window.innerWidth, window.innerHeight);
 
-        handler = new BallHandler(p5, 1000);
+        handler = new BallHandler(p5, 500);
     }
 
     p5.draw = () => {
@@ -67,6 +67,7 @@ class BallHandler {
     }
 
     /**
+     * Simulates how each ball's x values should change
      * Draws the simulation to the canvas.
      */
     draw(): void {
@@ -101,8 +102,16 @@ class BallHandler {
             // Gets the rate at which the ball's x value should change. Calculus derivation.
             let delX: number = (this.balls[0].ySpeed * (this.balls[i].y - this.balls[0].y)) / (this.balls[i].x - this.balls[0].x);
 
-            // Make sure that the speed of every ball is between -1 and 1 (this is a bad solution needs to be revised)
-            this.balls[i].x += Math.tanh(delX);
+            // Calculate an exponential decay based on how fast the ball is moving.
+            // This will make the ball move faster the further away it is.
+            // It helps to prevent asymptotic infinites in the equation for delX.
+            let calc: number = Math.E ** -Math.abs(delX / 100);
+
+            // Apply this exponential decay
+            delX = delX < 0 ? -calc : calc;
+
+            // Update the balls position based on its calculated speed.
+            this.balls[i].x += delX;
 
             // If the center ball is touching the top or bottom of the screen
             if (this.balls[0].y < 0 || this.balls[0].y > this.p5.height) {
