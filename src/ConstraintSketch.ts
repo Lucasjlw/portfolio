@@ -1,3 +1,4 @@
+import { sign } from "crypto";
 import { P5Instance } from "react-p5-wrapper";
 import { Bubble } from "./PhysicsEngineSketch";
 
@@ -7,7 +8,7 @@ export default function sketch(p5: P5Instance) {
     p5.setup = () => {
         p5.createCanvas(window.innerWidth, window.innerHeight);
 
-        handler = new BallHandler(p5, 500);
+        handler = new BallHandler(p5, 1);
     }
 
     p5.draw = () => {
@@ -62,7 +63,6 @@ class BallHandler {
             )
         }
 
-        // Set the center ball's ySpeed to 5;
         this.balls[0].ySpeed = 5;
     }
 
@@ -137,6 +137,8 @@ class BallHandler {
  */
 class Ball extends Bubble {
     count: number = 0;
+    xAcceleration: number = 0;
+    yAcceleration: number = 0;
 
     constructor(p5: P5Instance, x: number, y: number, width: number) {
         super(p5, x, y, width);
@@ -158,7 +160,7 @@ class Ball extends Bubble {
 
     /** This move method is not as complex as the original Bubble class. */
     move(): void {
-        this.x += this.xSpeed;
+        this.x += this.xSpeed; 
         this.y += this.ySpeed;
     }
 }

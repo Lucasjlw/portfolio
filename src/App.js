@@ -1,5 +1,5 @@
 import { ReactP5Wrapper } from "react-p5-wrapper"
-import sketch from "./ConstraintSketch.ts";
+import sketch from "./test.ts";
 
 function App() {
   return (

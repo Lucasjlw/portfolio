@@ -6,10 +6,12 @@ export function sketch(p5: P5Instance): void {
     p5.setup = () => {
         p5.createCanvas(window.innerWidth, window.innerHeight);
 
-        handler = new PhysicsHandler(300);
+        handler = new PhysicsHandler(50);
     }
 
     p5.draw = () => {
+        p5.background(0);
+
         handler.draw();
     }
 
@@ -22,7 +24,7 @@ export function sketch(p5: P5Instance): void {
 
         constructor(numBubbles: number) {
             for (let i = 0; i < numBubbles; i++) {
-                this.bubbles.push(new Bubble(p5, undefined, undefined, 5, 5));
+                this.bubbles.push(new Bubble(p5, undefined, undefined, 20, 20));
             }
         }
 
