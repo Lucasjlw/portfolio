@@ -1,5 +1,5 @@
 import { ReactP5Wrapper } from "react-p5-wrapper"
-import sketch from "./test.ts";
+import sketch from "./ParticleDrawer.ts";
 
 function App() {
   return (
