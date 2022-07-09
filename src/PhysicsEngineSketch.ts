@@ -80,8 +80,7 @@ export function sketch(p5: P5Instance): void {
                             break;
                         }
                     }
-                }
-                
+                } 
             }
         } 
     }
